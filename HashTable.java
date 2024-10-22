@@ -18,7 +18,7 @@ public class HashTable {
 
     public void bubbleSort(){
         int n = keys.length;
-        boolean swapped = false;
+        boolean swapped;
         for (int i = 0; i < n  - 1; i++) {
             swapped = false;
             for (int j = 0; j < n - i - 1; j++){
@@ -30,6 +30,10 @@ public class HashTable {
                 }
             }
         }
+    }
+
+    public void insertionSort(){
+
     }
 
     public boolean search(int key) {
