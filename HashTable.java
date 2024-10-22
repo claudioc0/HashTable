@@ -32,8 +32,20 @@ public class HashTable {
         }
     }
 
-    public void insertionSort(){
 
+    public void insertionSort(){
+        int n = keys.length;
+        for (int i = 0; i < n; i++) {
+            int key = keys[i];
+            int j = i - 1;
+
+            while (j >= 0 && keys[j] > key){
+                keys[j + 1] = keys[j];
+                j--;
+            }
+            keys[j + 1] = key;
+        };
+        
     }
 
     public boolean search(int key) {
