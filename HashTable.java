@@ -1,10 +1,12 @@
-import java.util.Arrays;
+    import java.util.Arrays;
 
 public class HashTable {
     private int[] keys;
+    private int size;
 
-    public HashTable(int size) {
-        keys = new int[size];
+    public HashTable(int capacity) {
+        keys = new int[capacity];
+        this.size = 0;
     }
 
     private int hash(int key) {
@@ -13,55 +15,93 @@ public class HashTable {
 
     public void insert(int key) {
         int value = hash(key);
+        while (keys[value] != 0) {
+            value = (value + 1) % keys.length;
+        }
         keys[value] = key;
+        size++;
     }
 
-    public void bubbleSort(){
-        int n = keys.length;
-        boolean swapped;
-        for (int i = 0; i < n  - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++){
-                if ( keys[j] > keys[j + 1]){
-                    int temp = keys[j];
-                    keys[j] = keys[j + 1];
-                    keys[j + 1] = temp;
+    public void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    public void bubbleSort() {
+        for (int i = 0; i < size ; i++) {
+            boolean swapped = false;
+            for (int j = 0; j < size - i ; j++) {
+                if (keys[j] > keys[j + 1]) {
+                    swap(keys, j, j + 1);
                     swapped = true;
                 }
             }
+            if (!swapped) break;
         }
     }
 
-
-    public void insertionSort(){
-        int n = keys.length;
-        for (int i = 0; i < n; i++) {
+    public void insertionSort() {
+        for (int i = 1; i < size + 1; i++) {
             int key = keys[i];
             int j = i - 1;
 
-            while (j >= 0 && keys[j] > key){
+            while (j >= 0 && keys[j] > key) {
                 keys[j + 1] = keys[j];
                 j--;
             }
             keys[j + 1] = key;
-        };
-        
+        }
+    }
+
+    public void quickSort() {
+        quickSort(keys, 0, size );
+    }
+
+    private void quickSort(int[] array, int low, int high) {
+        if (low < high) {
+            int pivotIndex = partition(array, low, high);
+            quickSort(array, low, pivotIndex - 1);
+            quickSort(array, pivotIndex + 1, high);
+        }
+    }
+
+    private int partition(int[] array, int low, int high) {
+        int pivot = array[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (array[j] <= pivot) {
+                i++;
+                swap(array, i, j);
+            }
+        }
+
+        swap(array,i + 1, high);
+        return i + 1;
     }
 
     public boolean search(int key) {
         int value = hash(key);
-        if(keys[value] == key) {
-            return true;
+        while (keys[value] != 0) {
+            if (keys[value] == key) return true;
+            value = (value + 1) % keys.length;
         }
         return false;
     }
 
     public int remove(int key) {
         int value = hash(key);
-        int removedKey = keys[value];
-        keys[value] = 0;
-
-        return removedKey;
+        while (keys[value] != 0) {
+            if (keys[value] == key) {
+                int removedKey = keys[value];
+                keys[value] = 0;
+                size--;
+                return removedKey;
+            }
+            value = (value + 1) % keys.length;
+        }
+        return -1;
     }
 
     @Override
