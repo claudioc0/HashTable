@@ -1,4 +1,4 @@
-    import java.util.Arrays;
+import java.util.Arrays;
 
 public class HashTable {
     private int[] keys;
@@ -6,7 +6,7 @@ public class HashTable {
 
     public HashTable(int capacity) {
         keys = new int[capacity];
-        this.size = 0;
+        this.size = 1;
     }
 
     private int hash(int key) {
@@ -29,9 +29,9 @@ public class HashTable {
     }
 
     public void bubbleSort() {
-        for (int i = 0; i < size ; i++) {
+        for (int i = 0; i < size - 1; i++) {
             boolean swapped = false;
-            for (int j = 0; j < size - i ; j++) {
+            for (int j = 0; j < size - i - 1; j++) {
                 if (keys[j] > keys[j + 1]) {
                     swap(keys, j, j + 1);
                     swapped = true;
@@ -42,7 +42,7 @@ public class HashTable {
     }
 
     public void insertionSort() {
-        for (int i = 1; i < size + 1; i++) {
+        for (int i = 1; i < size; i++) {
             int key = keys[i];
             int j = i - 1;
 
@@ -55,7 +55,7 @@ public class HashTable {
     }
 
     public void quickSort() {
-        quickSort(keys, 0, size );
+        quickSort(keys, 0, size - 1);
     }
 
     private void quickSort(int[] array, int low, int high) {
@@ -77,7 +77,7 @@ public class HashTable {
             }
         }
 
-        swap(array,i + 1, high);
+        swap(array, i + 1, high);
         return i + 1;
     }
 
@@ -101,7 +101,7 @@ public class HashTable {
             }
             value = (value + 1) % keys.length;
         }
-        return -1;
+        return -1; 
     }
 
     @Override
@@ -109,3 +109,4 @@ public class HashTable {
         return Arrays.toString(keys);
     }
 }
+
