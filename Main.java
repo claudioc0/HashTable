@@ -11,6 +11,7 @@ public class Main {
         hashTable.insert(76);
         hashTable.insert(1);
         hashTable.insert(22);
+        hashTable.insert(399);
 
         System.out.println("Antes do Bubble Sort" + hashTable);
 
@@ -30,6 +31,7 @@ public class Main {
         hashTable1.insert(79);
         hashTable1.insert(67);
         hashTable1.insert(43);
+        hashTable1.insert(399);
 
         System.out.println("Antes do Insertion Sort" + hashTable1);
 
@@ -49,6 +51,7 @@ public class Main {
         hashTable2.insert(66);
         hashTable2.insert(55);
         hashTable2.insert(91);
+        hashTable2.insert(399);
 
         System.out.println("Antes do Quick Sort" + hashTable2);
 

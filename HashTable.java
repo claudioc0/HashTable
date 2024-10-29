@@ -6,7 +6,7 @@ public class HashTable {
 
     public HashTable(int capacity) {
         keys = new int[capacity];
-        this.size = 1;
+        this.size = 0;
     }
 
     private int hash(int key) {
@@ -101,7 +101,7 @@ public class HashTable {
             }
             value = (value + 1) % keys.length;
         }
-        return -1; 
+        return -1;
     }
 
     @Override
